@@ -1,31 +1,41 @@
-int gameState;
+Game game;
+Player firstPlayer;
+Player secondPlayer;
+
 void setup() {
   size(600, 600);
-  gameState = 1;
+  game = new Game();
+  firstPlayer = new Player("human", 255); //1
+  secondPlayer = new Player("computer", 0); //-1
 }
+
 void draw() {
-  switch(gameState) {
-    case 1:
-      //display beginning
-      break;
-    case 2:
-      //display board
-      break;
-    case 3:
-      //display ending
-      break;
-  }
-}
-void mousePressed() {
-  switch(gameState) {
-  case 1: 
-    gameState = 2;
+  switch(game.state) {
+  case 1:
+    game.displayBeginning();
     break;
-  case 2:
-    //first player moves
+  case 2: 
+    game.displayBoard();
     break;
   case 3: 
-    //new game
+    game.displayEnding();
     break;
   }
+}
+
+void mousePressed() {
+  switch(game.state) {
+  case 1: 
+    game.state = 2;
+    break;
+  case 2:
+    firstPlayer.move();
+    break;
+  case 3: 
+    game = new Game();
+    break;
+  }
+}
+void keyPressed() {
+   println(firstPlayer.heuristic(game.board)); 
 }
