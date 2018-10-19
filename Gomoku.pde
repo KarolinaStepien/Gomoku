@@ -16,3 +16,16 @@ void draw() {
       break;
   }
 }
+void mousePressed() {
+  switch(gameState) {
+  case 1: 
+    gameState = 2;
+    break;
+  case 2:
+    //first player moves
+    break;
+  case 3: 
+    //new game
+    break;
+  }
+}
