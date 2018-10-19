@@ -80,4 +80,205 @@ class Player {
       return (tempWhichPlayerMoves == 1)? results.get(results.size()-1) : results.get(0);
     }
   }
+  
+  int heuristic(Field[][] fields) {
+    //int jedynki = 0;
+    int dwojki = 0;
+    int trojki = 0;
+    int czworki = 0;
+    int piatki = 0;
+
+    int suma1 = 0;
+    int suma2 = 0;
+    int suma = 0;
+
+    int licznikPoziom;
+    int licznikPion;
+    int licznikSkosI; // \ od srodka w gore
+    int licznikSkosII; // \ od ponizej srodka w dol
+    int licznikSkosIII; // / od gory do srodka
+    int licznikSkosIV; // / od ponizej srodka w dol /
+
+    int dlugosc = fields.length;
+
+    int whichPlayerMoves;
+
+    for (int f = 0; f < 2; f++) {
+      if (f == 0) {
+        whichPlayerMoves = 1; //computer (different than anywhere else)
+      } else {
+        whichPlayerMoves = -1; //human
+      }
+      for (int n = 0; n < dlugosc; n++) {
+        licznikPoziom = 0;
+        licznikPion = 0;
+        licznikSkosI = 0;
+        licznikSkosII = 0;
+        licznikSkosIII = 0;
+        licznikSkosIV = 0;
+        for (int m = 0; m < dlugosc; m++) {
+          //poziom
+          if (fields[n][m].state == whichPlayerMoves) {
+            licznikPoziom++;
+          } else {
+            switch(licznikPoziom) {
+              //case 1: 
+              //  jedynki++;
+              //  break;
+            case 2: 
+              dwojki++;
+              break;
+            case 3: 
+              trojki++;
+              break;
+            case 4: 
+              czworki++;
+              break;
+            case 5: 
+              piatki++;
+              break;
+            }
+            licznikPoziom = 0;
+          }
+          //pion
+          if (fields[m][n].state == whichPlayerMoves) {
+            licznikPion++;
+          } else {
+            switch(licznikPion) {
+              //case 1: 
+              //  jedynki++;
+              //  break;
+            case 2: 
+              dwojki++;
+              break;
+            case 3: 
+              trojki++;
+              break;
+            case 4: 
+              czworki++;
+              break;
+            case 5: 
+              piatki++;
+              break;
+            }
+            licznikPion = 0;
+          }
+          //skos1
+
+          // od glownej przekatnej w gore \
+          if (m+n < dlugosc) {
+            // od glownej przekatnej w gore \
+            if (fields[m][m+n].state == whichPlayerMoves) {
+              licznikSkosI++;
+            } else {
+              switch(licznikSkosI) {
+                //case 1: 
+                //  jedynki++;
+                //  break;
+              case 2: 
+                dwojki++;
+                break;
+              case 3: 
+                trojki++;
+                break;
+              case 4: 
+                czworki++;
+                break;
+              case 5: 
+                piatki++;
+                break;
+              }
+              licznikSkosI = 0;
+            }
+          }
+          // od glownej przekatnej w dol \
+          if (m+n+1 < dlugosc) {
+            if (fields[m+n+1][m].state == whichPlayerMoves) {
+              licznikSkosII++;
+            } else {
+              switch(licznikSkosII) {
+                //case 1: 
+                //  jedynki++;
+                //  break;
+              case 2: 
+                dwojki++;
+                break;
+              case 3: 
+                trojki++;
+                break;
+              case 4: 
+                czworki++;
+                break;
+              case 5: 
+                piatki++;
+                break;
+              }
+              licznikSkosII = 0;
+            }
+          }
+
+          // skos2
+
+          // od gory do glownej przekatnej /
+          if (n-m >= 0) {
+            if (fields[n-m][m].state == whichPlayerMoves) {
+              licznikSkosIII++;
+            } else {
+              switch(licznikSkosIII) {
+                //case 1: 
+                //  jedynki++;
+                //  break;
+              case 2: 
+                dwojki++;
+                break;
+              case 3: 
+                trojki++;
+                break;
+              case 4: 
+                czworki++;
+                break;
+              case 5: 
+                piatki++;
+                break;
+              }
+              licznikSkosIII = 0;
+            }
+          }
+          // od glownej przekatnej w dol /
+          if (n+m+1 < dlugosc) {
+            if (fields[dlugosc-1-m][n+m+1].state == whichPlayerMoves) {
+              licznikSkosIV++;
+            } else {
+              switch(licznikSkosIV) {
+              //case 1: 
+              //  jedynki++;
+              //  break;
+              case 2: 
+                dwojki++;
+                break;
+              case 3: 
+                trojki++;
+                break;
+              case 4: 
+                czworki++;
+                break;
+              case 5: 
+                piatki++;
+                break;
+              }
+              licznikSkosIV = 0;
+            }
+          }
+        } //m
+      } //n
+      if(whichPlayerMoves == 0){
+        suma1 = /*jedynki +*/ dwojki*5 + trojki*20 + czworki*100 + piatki*1000 + (int)random(3);
+      } else {
+        suma2 = /*jedynki +*/ dwojki*5 + trojki*20 + czworki*100 + piatki*1000 + (int)random(3);
+      }
+      
+    }
+    suma = suma1 - suma2;
+    return suma;
+  }
 }
