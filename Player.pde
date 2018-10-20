@@ -58,9 +58,9 @@ class Player {
         }
       }
     }
-    if (level == 1) {
-      return myHeuristic(tempBoard, i, j);
-      //return heuristic(tempBoard);
+    if (level == 2) {
+      //return myHeuristic(tempBoard, i, j);
+      return heuristic(tempBoard);
     } else {
       //println("considering move: " + i + ", " + j + " on level: " + level + " with player " + tempWhichPlayerMoves);
       //going deeper
@@ -80,7 +80,7 @@ class Player {
       return (tempWhichPlayerMoves == 1)? results.get(results.size()-1) : results.get(0);
     }
   }
-  
+
   int heuristic(Field[][] fields) {
     //int jedynki = 0;
     int dwojki = 0;
@@ -281,4 +281,92 @@ class Player {
     suma = suma1 - suma2;
     return suma;
   }
+
+  //int myHeuristic(Field[][] tempBoard, int playedI, int playedJ) {
+  //  println("checking " + playedI + " " + playedJ);
+  //  int state = tempBoard[playedI][playedJ].state;
+  //  int score = 0;
+  //  int[] value = new int[4];
+  //  // horizontal -
+  //  value[0] = 0;
+  //  int howMany = 0;
+  //  for (int i = playedJ -4; i <= playedJ +4; i++) {
+  //    if (i>=0 && i < tempBoard.length) {
+  //      if (tempBoard[playedI][i].state != state) {
+  //        howMany = 0;
+  //      } else {
+  //        howMany++;
+  //        if (howMany > value[0]) value[0] = howMany;
+  //      }
+  //    }
+  //  }
+  //  // vertical |
+  //  value[1] = 0;
+  //  howMany = 0;
+  //  for (int j = playedI -4; j <= playedI +4; j++) {
+  //    if (j>=0 && j < tempBoard.length) {
+  //      if (tempBoard[j][playedJ].state == state) {
+  //        howMany++;
+  //      } else {
+  //        if (howMany > value[1]) value[1] = howMany;
+  //        howMany = 0;
+  //      }
+  //    }
+  //  }
+  //  // backslah \
+  //  value[2] = 0;
+  //  howMany = 0;
+  //  for (int i = -4; i <= 4; i++) {
+  //    if (playedI + i >= 0 && playedI + i < tempBoard.length && playedJ + i >= 0 && playedJ + i < tempBoard.length) {
+  //      if (tempBoard[playedI + i][playedJ + i].state == state) {
+  //        howMany++;
+  //      } else {
+  //        if (howMany > value[2]) value[2] = howMany;
+  //        howMany = 0;
+  //      }
+  //    }
+  //  }
+  //  // slash /
+  //  value[3] = 0;
+  //  howMany = 0;
+  //  for (int i = - 4; i <= 4; i++) {
+  //    if (playedI - i >= 0 && playedI - i < tempBoard.length && playedJ + i >= 0 && playedJ + i < tempBoard.length) {
+  //      if (tempBoard[playedI - i][playedJ + i].state == state) {
+  //        howMany++;
+  //      } else {
+  //        if (howMany > value[3]) value[3] = howMany;
+  //        howMany = 0;
+  //      }
+  //    }
+  //  }
+  //  for (int i =0; i<4; i++) {
+  //    print(value[i] + " ");
+  //  }
+  //  for (int i =0; i<4; i++) {
+  //    switch(value[i]) {
+  //    case 0:
+  //      score += 0;
+  //      break;
+  //    case 1:
+  //      score += 0;
+  //      break;
+  //    case 2:
+  //      score += 5;
+  //      break;
+  //    case 3:
+  //      score += 20;
+  //      break;
+  //    case 4:
+  //      score += 100;
+  //      break;
+  //    case 5:
+  //      score += 1000;
+  //      break;
+  //    default:
+  //      score += 1000;
+  //    }
+  //  }
+  //  println("heuristic returned " + score);
+  //  return score += (int) random(3);
+  //}
 }

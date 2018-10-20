@@ -67,7 +67,7 @@ class Game {
         rect(50, 200, 500, 100);
         fill(firstPlayer.moveColor);
         textSize(40);
-        text("OHHHHH YOU LOST!", 200, height/2-40);
+        text("OHHHHH YOU LOST!", 100, height/2-40);
       }
     }
   }
