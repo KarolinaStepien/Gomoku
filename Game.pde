@@ -7,6 +7,8 @@ class Game {
   int lastJ;
   PImage ending;
   int blur;
+  boolean debug;
+  PImage beginning;
 
   //beginning state of the game:
   Game() {
@@ -16,6 +18,8 @@ class Game {
     lastI = -1;
     lastJ = -1;
     blur = 20;
+    debug = false;
+    beginning = loadImage("Start600.jpg");
   }
 
   //making new board:
@@ -32,13 +36,7 @@ class Game {
 
   //display functions
   void displayBeginning() { 
-    PImage img;
-    img = loadImage("Start600.jpg");
-    image(img, 0, 0);
-    //background(255);
-    //fill(#2C87E5);
-    //textSize(40);
-    //text("beginning text", 10, 50);
+    image(beginning, 0, 0);
   }
   void displayBoard() {
     for (Field[] row : board) {

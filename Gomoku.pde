@@ -37,5 +37,6 @@ void mousePressed() {
   }
 }
 void keyPressed() {
-   println(firstPlayer.heuristic(game.board)); 
+  if(key == 'd') game.debug = !game.debug;
+  if(key == 'h') println(firstPlayer.heuristic(game.board));
 }

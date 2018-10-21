@@ -22,57 +22,56 @@ class Field {
 
   //display function
   void render() {
-    if (state == 0) {
-      if (isMouseAbove) {
-        fill(#BC8C37);
-      } else {
-        if (isCheckable) {
-          fill(#F0D9B1);
-          //fill(#B5F2BB);
+    if (!game.debug) {
+      if (state == 0) {
+        if (isMouseAbove) {
+          fill(#BC8C37);
         } else {
-          fill(#F0D9B1);
+          if (isCheckable) {
+            fill(#F0D9B1);
+          } else {
+            fill(#F0D9B1);
+          }
+        }
+        stroke(#6C3A04);
+        strokeWeight(a/40);
+        rect(x, y, a, a);
+      } else {
+        fill(#F0D9B1);
+        stroke(#6C3A04);
+        strokeWeight(a/40);
+        rect(x, y, a, a);
+        if (state == 1) {
+          noStroke();
+          fill(firstPlayer.moveColor);
+          ellipse(x + a/2, y + a/2, a- 0.1*a, a-0.1*a);
+        } else {
+          noStroke();
+          fill(secondPlayer.moveColor);
+          ellipse(x + a/2, y + a/2, a- 0.1*a, a-0.1*a);
+        }
+      }
+    } else {
+      if (state == 0) {
+        if (isMouseAbove) {
+          fill(200);
+        } else {
+          if (isCheckable) {
+            fill(200);
+          } else {
+            fill(150);
+          }
+        }
+      } else {
+        if (state == 1) {
+          fill(firstPlayer.moveColor);
+        } else {
+          fill(secondPlayer.moveColor);
         }
       }
       stroke(#6C3A04);
       strokeWeight(a/40);
       rect(x, y, a, a);
-    } else {
-      fill(#F0D9B1);
-      stroke(#6C3A04);
-      strokeWeight(a/40);
-      rect(x, y, a, a);
-      if (state == 1) {
-        noStroke();
-        fill(firstPlayer.moveColor);
-        ellipse(x + a/2, y + a/2, a- 0.1*a, a-0.1*a);
-      } else {
-        noStroke();
-        fill(secondPlayer.moveColor);
-        ellipse(x + a/2, y + a/2, a- 0.1*a, a-0.1*a);
-      }
     }
   }
-  //void render() {
-  //  if (state == 0) {
-  //    if (isMouseAbove) {
-  //      fill(200);
-  //    } else {
-  //      if (isCheckable) {
-  //        fill(#E3C080);
-  //        //fill(#B5F2BB);
-  //      } else {
-  //        fill(#E3C080);
-  //      }
-  //    }
-  //  } else {
-  //    if (state == 1) {
-  //      fill(firstPlayer.moveColor);
-  //    } else {
-  //      fill(secondPlayer.moveColor);
-  //    }
-  //  }
-  //  stroke(#6C3A04);
-  //  strokeWeight(a/40);
-  //  rect(x, y, a, a);
-  //}
 }
